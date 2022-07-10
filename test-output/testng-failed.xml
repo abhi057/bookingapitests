@@ -3,12 +3,12 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="BookingTests">
+      <class name="hotelbookingtests.BookingTests">
         <methods>
-          <include name="deleteBooking"/>
-          <include name="partialUpdateBooking"/>
+          <include name="generatetoken"/>
+          <include name="postbooking"/>
         </methods>
-      </class> <!-- BookingTests -->
+      </class> <!-- hotelbookingtests.BookingTests -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

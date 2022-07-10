@@ -87,15 +87,20 @@ public class BookingTests {
 			int getbookingid = bookingidlist.get(i);
 
 			if (String.valueOf(getbookingid).equals(newbookingid))
-
+			{
 				System.out.println("Newly created booking id found");
 			break;
+			}
+			else {
+				System.out.println("Newly created booking id not found");
+			}
 
 		}
 
 	}
 
-//	// partial update
+	
+// partial update
 //	
 	@Test(priority = 2)
 
