@@ -2,14 +2,14 @@
 ----------------------------------------------------------------------------------------------------------------------------------------------
 Description:
 ----------------------------------------------------------------------------------------------------------------------------------------------
-I have implemented the three test cases with a Maven project using Rest Assured and Java with TestNG. Have used JSON parser and implemented POJO classes. 
+I have implemented the three test cases with a Maven project using Rest Assured and Java with Junit/TestNG. Have used JSON parser and implemented POJO classes. 
 The flow is as follows:
 1. Generate Token
-2. Create Booking and cature the booking id from the response - POST a booking 
-3. Retrive all booking and verify that newly generated booking id exists - GET all bookings
-4. Update firstname and lastname of the nelwly created booking- PATCH a booking
-5. Retrive the updated booking and verify that update is successful - GET a booking 
-6. Delete the newly created booking - DELETE a booking 
+2. Create Booking and capture the booking id from the response - POST a booking
+3. Retrieve all booking and verify that newly generated booking id exists - GET all bookings
+4. Update firstname and lastname of the newly created booking- PATCH a booking
+5. Retrieve the updated booking and verify that update is successful - GET a booking
+6. Delete the newly created booking - DELETE a booking
 7. Verify that newly created booking is deleted
 ----------------------------------------------------------------------------------------------------------------------------------------------
 Structure and guide run the scripts:
