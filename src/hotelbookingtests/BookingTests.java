@@ -1,4 +1,5 @@
 package hotelbookingtests;
+
 import static io.restassured.RestAssured.given;
 
 import java.util.List;
@@ -6,6 +7,7 @@ import java.util.List;
 import static org.testng.Assert.assertEquals;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import files.GetBooking;
@@ -24,7 +26,7 @@ public class BookingTests {
 	public static String token = "";
 	public static String newbookingid = "";
 
-	@Test(priority=0)
+	@BeforeClass
 	public void generatetoken() {
 		RestAssured.baseURI = uri + "/auth";
 		// Generate Token
@@ -43,9 +45,8 @@ public class BookingTests {
 
 	}
 
-	@Test(priority=1)
-	public void postbooking()
-	{
+	@Test(priority = 1)
+	public void postbooking() {
 		// Create a booking
 
 		RestAssured.baseURI = uri + "/booking";
@@ -68,8 +69,8 @@ public class BookingTests {
 				.header("server", "Cowboy").extract().response().asString();
 
 		System.out.println(postBookingResponse);
+		// parsing the json
 		JsonPath js_booking = ReUsableMethods.rawToJson(postBookingResponse);
-//		JsonPath js_booking = new JsonPath(postBookingResponse); // for parsing Json
 		String generatedbooking = js_booking.getString("bookingid");
 		System.out.println("Booking Id created is:" + generatedbooking);
 		newbookingid = generatedbooking;
@@ -82,42 +83,32 @@ public class BookingTests {
 
 		List<Integer> bookingidlist = resp.jsonPath().getList("bookingid");
 		System.out.println("Total booking ids: " + bookingidlist.size());
-		for (int i = 0; i < bookingidlist.size(); i++) 
-		{
-
+		for (int i = 0; i < bookingidlist.size(); i++) {
 			int getbookingid = bookingidlist.get(i);
-			// System.out.println(getbookingid);
-			try {
-				if (String.valueOf(getbookingid).equals(newbookingid)) 
-				{
-					System.out.println("Newly created booking id found");
-					break;
-				}
 
-			} catch (Exception e)
-			{
-				System.out.println("Booking id not found ==" + e.getMessage());
-			}
+			if (String.valueOf(getbookingid).equals(newbookingid))
+
+				System.out.println("Newly created booking id found");
+			break;
 
 		}
-		
+
 	}
-	
 
 //	// partial update
 //	
-    @Test(priority=2)
-    
+	@Test(priority = 2)
+
 	public void partialUpdateBooking() {
-    	
-    	System.out.println("Booking id to be updated is" +newbookingid);
-    	
-        System.out.println("---------------------Partial update booking--------------------");
-	    
+
+		System.out.println("Booking id to be updated is" + newbookingid);
+
+		System.out.println("---------------------Partial update booking--------------------");
+
 		PartialUpdate pu = new PartialUpdate();
 		pu.setFirstname("Tom");
 		pu.setLastname("Harry");
-		
+
 		given().log().all().header("Content-Type", "application/json").header("Cookie", "token=" + token).body(pu)
 				.when().patch(newbookingid).then().assertThat().log().all().statusCode(200);
 //
@@ -149,17 +140,18 @@ public class BookingTests {
 
 	}
 
-    @Test(priority=3)
+	@Test(priority = 3)
 	public void deleteBooking() {
 
 		// Delete Booking
 
 		System.out.println("---------------------Delete booking--------------------");
-		
+
 		given().log().all().header("Content-Type", "application/json").header("Cookie", "token=" + token).when()
 				.delete(newbookingid).then().assertThat().log().all().statusCode(201);
 
-		// verify that getbooking returns 404 not found
+		// verify that booking is deleted
+
 		given().log().all().when().get(newbookingid).then().assertThat().statusCode(404);
 
 //	given().log().all().header("Content-Type", "application/json").header("Cookie", "token="+token).when()
