@@ -20,6 +20,14 @@ src --
       |
        hotelbookingtests ( It has BookingTests.java file. Right click on this and run as testNG test and see the results in console)
        
+----------------------------------------------------------------------------------------------------------------------------------------------       
+Steps to take clone and run tests
+----------------------------------------------------------------------------------------------------------------------------------------------
+$ git clone https://github.com/abhi057/bookingapitests.git
+$ git checkout master
+
+Import the project into IDE and go to hotelbookingtests package. It has BookingTests.java file. Right click on this and run as testNG test and see the results in console
+       
  ----------------------------------------------------------------------------------------------------------------------------------------------
  Sample run output:
  ----------------------------------------------------------------------------------------------------------------------------------------------
